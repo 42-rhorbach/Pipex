@@ -6,22 +6,25 @@
 #    By: rhorbach <rhorbach@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/14 12:49:02 by rhorbach      #+#    #+#                  #
-#    Updated: 2023/01/25 16:12:17 by rhorbach      ########   odam.nl          #
+#    Updated: 2023/03/16 15:04:28 by rhorbach      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
-HEADERFILES = ./libft/libft.h ./src/ft_printf.h ./src/ft_conv.h
+NAME = pipex
+HEADERFILES = src/pipex.h
 NORMFLAGS = -Wall -Wextra -Werror $(if $(DEBUG),-g -fsanitize=address)
 INCLUDES = $(addprefix -I, $(sort $(dir $(HEADERFILES))))
 OBJDIR = obj
 FILES = \
-	./src/ft_printf.c		\
-	./src/ft_conv_txt.c		\
-	./src/ft_conv_num.c
+	./src/pipex.c	\
+	./src/error.c
+
 OBJFILES = $(addprefix $(OBJDIR)/,$(FILES:c=o))
 
 LIBFT = ./libft/libft.a
+
+HEADERFILES += ./libft/libft.h
+LIBFLAGS = -L$(dir $(LIBFT)) -lft
 
 clear_line = \e[K
 move_up = \e[A
@@ -34,8 +37,7 @@ endef
 all: $(NAME)
 
 $(NAME): $(OBJFILES) $(LIBFT)
-	cp $(LIBFT) $(NAME)
-	ar -rcs $(NAME) $(OBJFILES)
+	$(CC) $(NORMFLAGS) $(INCLUDES) $(LIBFLAGS) $(OBJFILES) -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(dir $(LIBFT))
