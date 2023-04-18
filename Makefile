@@ -6,7 +6,7 @@
 #    By: rhorbach <rhorbach@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/14 12:49:02 by rhorbach      #+#    #+#                  #
-#    Updated: 2023/03/16 15:04:28 by rhorbach      ########   odam.nl          #
+#    Updated: 2023/04/17 13:27:35 by rhorbach      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ NORMFLAGS = -Wall -Wextra -Werror $(if $(DEBUG),-g -fsanitize=address)
 INCLUDES = $(addprefix -I, $(sort $(dir $(HEADERFILES))))
 OBJDIR = obj
 FILES = \
-	./src/pipex.c	\
+	./src/pipex.c		\
+	./src/children.c	\
+	./src/pipex_utils.c \
 	./src/error.c
 
 OBJFILES = $(addprefix $(OBJDIR)/,$(FILES:c=o))
@@ -56,8 +58,8 @@ fclean: clean
 
 re: fclean all
 
-bonus:
-	$(MAKE) all BONUS=1
+# bonus:
+# 	$(MAKE) all BONUS=1
 
 
 ifdef DEBUG
