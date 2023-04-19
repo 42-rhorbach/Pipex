@@ -6,11 +6,24 @@
 /*   By: rhorbach <rhorbach@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/17 10:46:03 by rhorbach      #+#    #+#                 */
-/*   Updated: 2023/04/17 12:55:46 by rhorbach      ########   odam.nl         */
+/*   Updated: 2023/04/19 16:11:16 by rhorbach      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+t_error	get_paths(char **envp, char ***paths)
+{
+	char	*path;
+
+	path = getenvvar("PATH", envp);
+	if (path == NULL)
+		return (set_error(E_ENVP));
+	*paths = ft_split(path, ':');
+	if (paths == NULL)
+		return (set_error(E_SYS));
+	return (OK);
+}
 
 char	*getenvvar(char *varname, char **envp)
 {
