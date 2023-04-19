@@ -6,7 +6,7 @@
 /*   By: rhorbach <rhorbach@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 12:00:02 by rhorbach      #+#    #+#                 */
-/*   Updated: 2023/04/19 16:55:52 by rhorbach      ########   odam.nl         */
+/*   Updated: 2023/04/19 18:21:37 by rhorbach      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_error	set_error(t_error err);
 t_error	get_error(void);
 void	print_error(t_error err);
 t_error	get_paths(char **envp, char ***paths);
+t_error	get_command_path(char *envp[], char **cmd_path, char *cmd);
 char	*getenvvar(char *varname, char **envp);
 t_error	find_in_paths(char *cmd, char **paths, char	**cmd_path);
 void	free_args(char *args[]);

@@ -6,7 +6,7 @@
 /*   By: rhorbach <rhorbach@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/17 12:58:19 by rhorbach      #+#    #+#                 */
-/*   Updated: 2023/04/19 16:00:16 by rhorbach      ########   odam.nl         */
+/*   Updated: 2023/04/19 18:17:37 by rhorbach      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,23 @@
 t_error	exec_command(char *cmd, char *envp[])
 {
 	char	**args;
-	char	**paths;
 	char	*cmd_path;
 
-	paths = NULL;
 	args = ft_split(cmd, ' ');
 	if (args == NULL)
 		return (set_error(E_ARGS));
+	if (args[0] == NULL)
+	{
+		free_args(args);
+		return (set_error(E_ARGS));
+	}
 	if (ft_strchr(args[0], '/') == NULL)
 	{
-		if (get_paths(envp, &paths) != OK
-			|| find_in_paths(args[0], paths, &cmd_path) != OK)
+		if (get_command_path(envp, &cmd_path, args[0]) != OK)
 		{
 			free_args(args);
-			if (paths != NULL)
-				free_args(paths);
-			return (get_error());
+			return (set_error(E_ARGS));
 		}
-		free_args(paths);
 	}
 	else
 		cmd_path = args[0];

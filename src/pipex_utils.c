@@ -6,11 +6,27 @@
 /*   By: rhorbach <rhorbach@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/17 10:46:03 by rhorbach      #+#    #+#                 */
-/*   Updated: 2023/04/19 16:11:16 by rhorbach      ########   odam.nl         */
+/*   Updated: 2023/04/19 18:23:29 by rhorbach      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+t_error	get_command_path(char *envp[], char **cmd_path, char *cmd)
+{
+	char	**paths;
+
+	paths = NULL;
+	if (get_paths(envp, &paths) != OK
+		|| find_in_paths(cmd, paths, cmd_path) != OK)
+	{
+		if (paths != NULL)
+			free_args(paths);
+		return (get_error());
+	}
+	free_args(paths);
+	return (OK);
+}
 
 t_error	get_paths(char **envp, char ***paths)
 {
