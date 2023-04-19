@@ -6,7 +6,7 @@
 /*   By: rhorbach <rhorbach@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/15 12:00:02 by rhorbach      #+#    #+#                 */
-/*   Updated: 2023/04/19 16:11:26 by rhorbach      ########   odam.nl         */
+/*   Updated: 2023/04/19 16:55:52 by rhorbach      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include "libft.h"
 
 # define READ 0

@@ -6,7 +6,7 @@
 /*   By: rhorbach <rhorbach@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/04 13:34:08 by rhorbach      #+#    #+#                 */
-/*   Updated: 2022/11/11 13:00:21 by rhorbach      ########   odam.nl         */
+/*   Updated: 2023/04/19 16:56:14 by rhorbach      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memset(void *ptr, int c, size_t n)
 	counter = 0;
 	while (counter != n)
 	{
-		str[counter] = c;
+		str[counter] = b;
 		counter++;
 	}
 	return (str);
